@@ -1,16 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
-const { task } = require("hardhat/config");
-require("hardhat-docgen");
 require("dotenv").config();
-
-const cleanup = require("./tasks/cleanup/cleanup.js");
-
-task(
-    "cleanup",
-    "Remove giveaway from consumers, cancel subscription and withdraw any remaining LINK that the contract holds",
-)
-    .addParam("address", "The address of the deployed giveaway contract")
-    .setAction((taskArgs, hre) => cleanup(taskArgs, hre));
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "";
 const REPORT_GAS = process.env.REPORT_GAS || false;
@@ -55,11 +44,6 @@ module.exports = {
     },
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
-    },
-    docgen: {
-        path: "./docs",
-        clear: true, //clears the content of the ouptut directory (in this  case, ./docs before generating new docs)
-        runOnCompile: false,
     },
     mocha: {
         timeout: 200000, //200 seconds
